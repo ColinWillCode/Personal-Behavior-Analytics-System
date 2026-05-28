@@ -48,3 +48,40 @@ def create_tables():
 
 def init_db():
     create_tables()
+def add_workout(date, workout_type, duration, intensity):
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute("""
+        INSERT INTO workouts (date, type, duration, intensity)
+        VALUES (?, ?, ?, ?)
+    """, (date, workout_type, duration, intensity))
+
+    conn.commit()
+    conn.close()
+
+
+def add_weight(date, weight):
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute("""
+        INSERT INTO weight (date, weight)
+        VALUES (?, ?)
+    """, (date, weight))
+
+    conn.commit()
+    conn.close()
+
+
+def add_study_session(date, language, minutes):
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute("""
+        INSERT INTO study_sessions (date, language, minutes)
+        VALUES (?, ?, ?)
+    """, (date, language, minutes))
+
+    conn.commit()
+    conn.close()
